@@ -1,0 +1,13 @@
+node_modules/
+*.tsbuildinfo
+*.log
+.DS_Store
+coverage/
+.npm/
+
+# Real environment files. The fixture pack commits a synthetic .env on purpose.
+.env
+.env.*
+!.env.example
+!examples/fixture-pack/.env
+!examples/fixture-pack/.env.example

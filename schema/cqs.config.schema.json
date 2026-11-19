@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cqs config",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "integer", "const": 1 },
+    "ignore": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Extra ignore globs. Built-in ignores still apply unless useDefaultIgnores is false."
+    },
+    "useDefaultIgnores": { "type": "boolean", "default": true },
+    "weights": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "relevance": { "type": "number", "minimum": 0 },
+        "freshness": { "type": "number", "minimum": 0 },
+        "completeness": { "type": "number", "minimum": 0 },
+        "tokens": { "type": "number", "minimum": 0 },
+        "structure": { "type": "number", "minimum": 0 },
+        "secrets": { "type": "number", "minimum": 0 }
+      },
+      "description": "Relative weights. They are renormalized so they sum to 1."
+    },
+    "tokenBudget": { "type": "number", "exclusiveMinimum": 0, "default": 80000 },
+    "staleDays": { "type": "number", "exclusiveMinimum": 0, "default": 180 },
+    "threshold": { "type": "integer", "minimum": 0, "maximum": 100, "default": 0 },
+    "maxFileBytes": { "type": "number", "exclusiveMinimum": 0, "default": 512000 },
+    "maxFiles": { "type": "integer", "exclusiveMinimum": 0, "default": 20000 },
+    "failOnSecrets": { "type": "boolean", "default": false },
+    "llm": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Reserved. The CLI never calls a model. A library reviewer may attach notes when this is true; the numeric score does not change."
+        },
+        "command": {
+          "type": "string",
+          "description": "Reserved for a future hook. cqs does not execute this command."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "name": "cqs",
+  "version": "0.1.0",
+  "description": "Offline context quality score for the packs you feed coding agents.",
+  "type": "module",
+  "bin": {
+    "cqs": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "action.yml",
+    "schema",
+    "scripts/pr-comment.sh",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && chmod +x dist/cli.js",
+    "typecheck": "tsc -p tsconfig.test.json --noEmit",
+    "test": "node --import tsx --test test/*.test.ts",
+    "prepublishOnly": "npm run build",
+    "cqs": "tsx src/cli.ts",
+    "demo": "tsx src/cli.ts score examples/fixture-pack"
+  },
+  "keywords": [
+    "cqs",
+    "context-quality",
+    "ai",
+    "agents",
+    "cli",
+    "lint",
+    "score"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tz0127302-cell/context-quality.git"
+  },
+  "homepage": "https://github.com/tz0127302-cell/context-quality#readme",
+  "bugs": {
+    "url": "https://github.com/tz0127302-cell/context-quality/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "yaml": "^2.6.1"
+  }
+}

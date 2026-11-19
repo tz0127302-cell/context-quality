@@ -1,0 +1,8 @@
+{
+  "name": "tiny-retry",
+  "version": "1.2.0",
+  "private": true,
+  "description": "Small retry helper used as a context-pack fixture.",
+  "type": "module",
+  "main": "src/index.ts"
+}
