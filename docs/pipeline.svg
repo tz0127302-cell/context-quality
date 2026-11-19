@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300" role="img" aria-labelledby="title desc">
+  <title id="title">How cqs scores a context pack</title>
+  <desc id="desc">A folder, file list, prompt, or stdin is discovered, scored on six heuristic dimensions, combined into a 0–100 score, and written as a terminal report, JSON, Markdown, SARIF, or GitHub annotations.</desc>
+  <rect width="960" height="300" fill="#f6f4ef"/>
+  <text x="32" y="36" fill="#1c1917" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="700">How cqs scores a context pack</text>
+  <text x="32" y="58" fill="#57534e" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13">Offline heuristics. No model call. The number does not depend on the wall clock.</text>
+
+  <g font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect x="32" y="84" width="150" height="150" rx="10" fill="#fffefb" stroke="#d6d3d1"/>
+    <text x="48" y="110" fill="#0f766e" font-size="12" font-weight="700">INPUT</text>
+    <text x="48" y="136" fill="#1c1917" font-size="14">Folder</text>
+    <text x="48" y="158" fill="#1c1917" font-size="14">File list</text>
+    <text x="48" y="180" fill="#1c1917" font-size="14">Prompt file</text>
+    <text x="48" y="202" fill="#1c1917" font-size="14">stdin</text>
+
+    <path d="M190 159 H214" stroke="#0f766e" stroke-width="1.5" fill="none"/>
+    <path d="M208 153 L216 159 L208 165" stroke="#0f766e" stroke-width="1.5" fill="none"/>
+
+    <rect x="216" y="84" width="160" height="150" rx="10" fill="#fffefb" stroke="#d6d3d1"/>
+    <text x="232" y="110" fill="#0f766e" font-size="12" font-weight="700">DISCOVER</text>
+    <text x="232" y="136" fill="#1c1917" font-size="14">Ignore globs</text>
+    <text x="232" y="158" fill="#1c1917" font-size="14">Skip binaries</text>
+    <text x="232" y="180" fill="#1c1917" font-size="14">Cap huge files</text>
+    <text x="232" y="202" fill="#1c1917" font-size="14">Estimate tokens</text>
+
+    <path d="M384 159 H408" stroke="#0f766e" stroke-width="1.5" fill="none"/>
+    <path d="M402 153 L410 159 L402 165" stroke="#0f766e" stroke-width="1.5" fill="none"/>
+
+    <rect x="410" y="84" width="230" height="150" rx="10" fill="#fffefb" stroke="#0f766e"/>
+    <text x="426" y="110" fill="#0f766e" font-size="12" font-weight="700">SIX DIMENSIONS · 0–100</text>
+    <text x="426" y="136" fill="#1c1917" font-size="14">Relevance · Freshness</text>
+    <text x="426" y="158" fill="#1c1917" font-size="14">Completeness · Tokens</text>
+    <text x="426" y="180" fill="#1c1917" font-size="14">Structure · Secret risk</text>
+    <text x="426" y="206" fill="#57534e" font-size="12">Weights renormalize to 1</text>
+
+    <path d="M648 159 H672" stroke="#0f766e" stroke-width="1.5" fill="none"/>
+    <path d="M666 153 L674 159 L666 165" stroke="#0f766e" stroke-width="1.5" fill="none"/>
+
+    <rect x="674" y="84" width="254" height="150" rx="10" fill="#134e4a"/>
+    <text x="690" y="110" fill="#99f6e4" font-size="12" font-weight="700">OVERALL</text>
+    <text x="690" y="148" fill="#f8fafc" font-size="28" font-weight="700">0–100</text>
+    <text x="690" y="174" fill="#ccfbf1" font-size="13">pretty · json · markdown</text>
+    <text x="690" y="196" fill="#ccfbf1" font-size="13">sarif · github annotations</text>
+    <text x="690" y="218" fill="#99f6e4" font-size="12">ranked edits via cqs suggest</text>
+  </g>
+</svg>

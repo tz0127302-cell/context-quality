@@ -1,0 +1,85 @@
+name: Context Quality Score
+description: >
+  Score a coding-agent context pack with the offline cqs heuristic.
+  Unofficial: not Atlassian CQS and not affiliated with any vendor.
+branding:
+  icon: check-square
+  color: blue
+inputs:
+  path:
+    description: File or directory to score
+    required: false
+    default: .
+  threshold:
+    description: Fail the job when the overall score is below this integer from 0 to 100
+    required: false
+    default: '60'
+  config:
+    description: Path to a cqs JSON config. Leave empty to discover .cqs.json
+    required: false
+    default: ''
+  ignore:
+    description: Extra ignore globs, separated by newlines
+    required: false
+    default: ''
+  markdown:
+    description: Path of the Markdown report to write. Leave empty to skip
+    required: false
+    default: cqs-report.md
+  sarif:
+    description: Path of the SARIF 2.1.0 report to write. Leave empty to skip
+    required: false
+    default: cqs.sarif
+  comment:
+    description: Opt in to post or update a pull request comment that contains the Markdown report. Leave false to score only.
+    required: false
+    default: 'false'
+  fail-on-secrets:
+    description: Fail when a credential pattern is found, even if the score clears the threshold
+    required: false
+    default: 'false'
+  token:
+    description: Token used only to post the pull request comment. Scoring does not use it.
+    required: false
+    default: ${{ github.token }}
+outputs:
+  score:
+    description: Overall score from 0 to 100
+    value: ${{ steps.score.outputs.score }}
+  grade:
+    description: excellent, good, fair, poor, or critical
+    value: ${{ steps.score.outputs.grade }}
+  passed:
+    description: true when the score met the threshold and secret policy
+    value: ${{ steps.score.outputs.passed }}
+runs:
+  using: composite
+  steps:
+    - name: Score context pack
+      id: score
+      continue-on-error: true
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_THRESHOLD: ${{ inputs.threshold }}
+        INPUT_CONFIG: ${{ inputs.config }}
+        INPUT_IGNORE: ${{ inputs.ignore }}
+        INPUT_MARKDOWN: ${{ inputs.markdown }}
+        INPUT_SARIF: ${{ inputs.sarif }}
+        INPUT_FAIL_ON_SECRETS: ${{ inputs.fail-on-secrets }}
+        ACTION_PATH: ${{ github.action_path }}
+      run: bash "$ACTION_PATH/scripts/action-score.sh"
+    - name: Comment on pull request
+      if: ${{ inputs.comment == 'true' && github.event_name == 'pull_request' }}
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        REPORT_PATH: ${{ inputs.markdown }}
+        ACTION_PATH: ${{ github.action_path }}
+      run: bash "$ACTION_PATH/scripts/pr-comment.sh"
+    - name: Apply score threshold
+      if: ${{ steps.score.outcome == 'failure' }}
+      shell: bash
+      run: exit 1

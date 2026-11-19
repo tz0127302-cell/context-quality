@@ -1,0 +1,14 @@
+{
+  "overall": 89,
+  "grade": "good",
+  "filesScanned": 13,
+  "dimensions": {
+    "relevance": 89,
+    "freshness": 92,
+    "completeness": 92,
+    "tokens": 92,
+    "structure": 100,
+    "secrets": 65
+  },
+  "note": "Pinned heuristic score for examples/fixture-pack. The pack is deterministic, so CI treats this as the known score."
+}
